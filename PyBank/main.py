@@ -1,4 +1,5 @@
-#This file reads profits and losses from a set time period, and calculates gains and losses
+#This file reads profits and losses from a set time period, and calculates gains and losses.
+#This code expects there to be a csv file name budget_data.csv with two columns.
 
 import os
 import csv
@@ -18,9 +19,11 @@ totalChange = 0
 
 #This relative path isn't working. main.py is located in the PyBank folder, so it should
 #csvpath = os.path.join('..', 'Resources', 'budget_data.csv') 
+resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources/budget_data.csv'
+analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/analysis'
 
-#Workaround solution
-csvpath = os.path.join('C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources/budget_data.csv')
+#https://stackoverflow.com/questions/2422798/python-os-path-join-on-windows
+csvpath = os.path.join(resourceLink)
 
 #lists to store data
 with open(csvpath) as csvfile:
@@ -66,9 +69,8 @@ print(f"Greatest Increase in Profits: {biggestGainMonth} (${biggestGain})\n")
 print(f"Greatest Decrease in Profits: {biggestLossMonth} (${biggestLoss})\n")
 
 #https://www.pythontutorial.net/python-basics/python-write-text-file/
-#Work around from relative folder directory
-#with open('PyBank_Results.txt', 'w', encoding='utf-8') as csvfile_out:
-with open('C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources/analysis.txt', 'w', encoding='utf-8') as csvfile_out:
+#Work around from relative folder directory - Relative directories randomly stop working, but it doesn't seem to be required.
+with open(analysisLink + '/PyBank_Results.txt', 'w', encoding='utf-8') as csvfile_out:
     csvfile_out.write("Financial Analysis\n")
     csvfile_out.write("-----------------------------\n")
     csvfile_out.write(f"Total Months: {numOfMonths}\n")

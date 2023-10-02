@@ -20,7 +20,7 @@ winnerName = []
 #This relative path isn't working. main.py is located in the PyBank folder, so it should
 #csvpath = os.path.join('..', 'Resources', 'budget_data.csv') 
 resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyPoll/Resources'
-analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/analysis'
+analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyPoll/analysis'
 
 #Workaround solution
 csvpath = os.path.join(resourceLink +'/election_data.csv')

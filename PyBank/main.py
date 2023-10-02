@@ -19,11 +19,11 @@ totalChange = 0
 
 #This relative path isn't working. main.py is located in the PyBank folder, so it should
 #csvpath = os.path.join('..', 'Resources', 'budget_data.csv') 
-resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources/budget_data.csv'
+resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources'
 analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/analysis'
 
 #https://stackoverflow.com/questions/2422798/python-os-path-join-on-windows
-csvpath = os.path.join(resourceLink)
+csvpath = os.path.join(resourceLink + '/budget_data.csv')
 
 #lists to store data
 with open(csvpath) as csvfile:
@@ -78,3 +78,4 @@ with open(analysisLink + '/PyBank_Results.txt', 'w', encoding='utf-8') as csvfil
     csvfile_out.write(f"Average Change: ${round(totalChange / (numOfMonths - 1), 2)} \n")
     csvfile_out.write(f"Greatest Increase in Profits: {biggestGainMonth} (${biggestGain})\n")
     csvfile_out.write(f"Greatest Decrease in Profits: {biggestLossMonth} (${biggestLoss})\n")
+    

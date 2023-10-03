@@ -1,8 +1,11 @@
 #This file reads profits and losses from a set time period, and calculates gains and losses.
 #This code expects there to be a csv file name budget_data.csv with two columns.
 
-import os
 import csv
+
+#Grab the data
+resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources/budget_data.csv'
+analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/analysis/PyBank_results.txt'
 
 month = []
 profitLossGain = []
@@ -15,22 +18,14 @@ biggestGain = 0
 totalLossGain = 0
 totalChange = 0
 
-#Grab the data
-
-#This relative path isn't working. main.py is located in the PyBank folder, so it should
-#csvpath = os.path.join('..', 'Resources', 'budget_data.csv') 
-resourceLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/Resources'
-analysisLink = 'C:/Users/Steve/python/Bootcamp_Homework/python-challenge/PyBank/analysis'
-
-#https://stackoverflow.com/questions/2422798/python-os-path-join-on-windows
-csvpath = os.path.join(resourceLink + '/budget_data.csv')
+csvpath = resourceLink
 
 #lists to store data
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    #Skip the header
-    next(csvreader)
+    #Store the header
+    csv_header = next(csvreader)
 
     #import data 
     for row in csvreader:
@@ -59,7 +54,8 @@ with open(csvpath) as csvfile:
         previousMonth = currentMonth
         totalLossGain = totalLossGain + currentLossGain
         totalChange = totalChange + currentChange
-       
+
+#Better to use two separate process to print, because it uses less resources.      
 print("Financial Analysis\n")
 print("-----------------------------\n")
 print(f"Total Months: {numOfMonths}\n")
@@ -68,9 +64,9 @@ print(f"Average Change: ${round(totalChange / (numOfMonths - 1), 2)} \n")
 print(f"Greatest Increase in Profits: {biggestGainMonth} (${biggestGain})\n")
 print(f"Greatest Decrease in Profits: {biggestLossMonth} (${biggestLoss})\n")
 
+#Don't want to keep opening and closing the file with a function. Open once, and write.
 #https://www.pythontutorial.net/python-basics/python-write-text-file/
-#Work around from relative folder directory - Relative directories randomly stop working, but it doesn't seem to be required.
-with open(analysisLink + '/PyBank_Results.txt', 'w', encoding='utf-8') as csvfile_out:
+with open(analysisLink, 'w', encoding='utf-8') as csvfile_out:
     csvfile_out.write("Financial Analysis\n")
     csvfile_out.write("-----------------------------\n")
     csvfile_out.write(f"Total Months: {numOfMonths}\n")
@@ -78,4 +74,3 @@ with open(analysisLink + '/PyBank_Results.txt', 'w', encoding='utf-8') as csvfil
     csvfile_out.write(f"Average Change: ${round(totalChange / (numOfMonths - 1), 2)} \n")
     csvfile_out.write(f"Greatest Increase in Profits: {biggestGainMonth} (${biggestGain})\n")
     csvfile_out.write(f"Greatest Decrease in Profits: {biggestLossMonth} (${biggestLoss})\n")
-    
